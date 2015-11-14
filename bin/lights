@@ -1,0 +1,95 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'hue'
+require 'pry'
+require 'slop'
+
+class Lights < Array
+
+  def method_missing method_name, *args, &block
+    map do |light|
+      light.public_send method_name, *args, &block
+    end
+  end
+
+  def on
+    self.on = true
+  end
+
+  def off
+    self.on = false
+  end
+
+  def full
+    set_state brightness: 255
+  end
+
+  def half
+    set_state brightness: 125
+  end
+
+  def alert
+    set_state alert: 'lselect'
+  end
+  alias_method :flash, :alert
+
+end
+
+
+hue = Hue::Client.new
+
+lights = Lights.new hue.lights.select{|l| l.name =~ /jared/i }
+
+
+opts = Slop.parse help: true do
+
+  on :c, :color=,             'Color: ?',                        as: Integer
+  on :C, :color_temperature=, 'Color temperature: 153..500',     as: Integer
+  on :H, :hue=,               'Hue: 0...65535',                  as: Integer
+  on :b, :brightness=,        'Brightness: 1..255',              as: Integer
+  on :e, :effect=,            'Effect: none | loop',             as: String
+  on :t, :transition=,        'Transition time: n (1 == 100ms)', as: Integer
+
+  command 'on' do
+    run{ lights.on }
+  end
+
+  command 'off' do
+    run{ lights.off }
+  end
+
+  command 'flash' do
+    run{ lights.flash }
+  end
+
+  command 'stop' do
+    run{ lights.set_state alert: 'none' }
+  end
+
+  command 'console' do
+    run{ Pry.start(lights) }
+  end
+
+  command 'state' do
+    run do
+      columns = %w{id name reachable? on? brightness color_temperature effect hue saturation color_mode}
+      states = lights.map do |light|
+        columns.map{|c| light.public_send c }
+      end
+      states.unshift columns
+      states.each do |state|
+        puts sprintf("%-2s %-15s %-10s %-5s %-10s %-20s %-10s %-10s %-10s %-10s", *state)
+      end
+    end
+  end
+
+end
+
+p state = Hash[opts.to_hash.reject{|k,v| v.nil? }]
+lights.set_state(state, state.delete(:transition))
+
+# mac_address = '00:17:88:09:e0:92'.gsub(/0(\d+)/, '\1')
+# broadcase_ip = `ifconfig | grep broadcast`.chomp[/broadcast\s+([\d\.]+)/i, 1]
+# `ping -c 2 #{broadcase_ip}`
+# ip_address = `arp -a`[%r|\(([\d\.]+)\) at #{mac_address}|, 1]

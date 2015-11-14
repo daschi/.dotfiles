@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+BRANCHES = `git branch -r`.chomp.split("\n  ").slice(1..-1)
+
+AUTHORS = {}
+
+BRANCHES.each{|branch|
+  author = `git log -1 --format="%ae" #{branch}`.chomp
+  (AUTHORS[author] ||= []) << branch
+}
+
+AUTHORS.sort_by{|a,b| b.size}.reverse.each{|author, branches|
+  puts "#{author}:\n  #{branches*"\n  "}\n\n"
+}

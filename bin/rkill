@@ -1,0 +1,5 @@
+#!
+for i in "$@" 
+do
+  ps -e -f | grep `ruby -e 'puts "[#{ARGV[0][0,1]}]#{ARGV[0][1..-1]}"' $i` | awk '{print $2}' | xargs kill -9
+done

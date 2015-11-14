@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+abort <<-USAGE if ARGV.length < 1
+usage:
+flv-to-mp4 from [to]
+USAGE
+
+
+from = File.expand_path(ARGV.shift)
+to   = ARGV.first ? File.expand_path(ARGV.shift) : from.sub(/\.flv\Z/, '.mp4')
+
+# command = %(ffmpeg -i #{from.inspect} -c:v libx264 -crf 19 #{to.inspect})
+command = %(ffmpeg -i #{from.inspect} -codec copy #{to.inspect})
+puts command
+exec command

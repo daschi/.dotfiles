@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+abort <<-USAGE if ARGV.length < 1
+usage:
+mp4tomp3 from [to]
+USAGE
+
+
+from = File.expand_path(ARGV.shift)
+to   = ARGV.first ? File.expand_path(ARGV.shift) : from.sub(/\.mp4\Z/, '.mp3')
+
+command = %(ffmpeg -i #{from.inspect} -f mp3 -ab 192000 -vn #{to.inspect})
+puts command
+exec command

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+alias git=hub
+alias copy=pbcopy
+alias paste=pbpaste
+
+alias ls='ls -GF'
+alias l='ls -tBh1'
+alias ll='l -l'
+alias lll='ls -Blah'
+alias llh='ll | head'
+
+alias c='clear'
+alias grep='grep --color'
+alias g='grep -i'
+
+alias df='df -h'
+alias du='du -h'
+alias less='less -r'
+
+alias openfiles='lsof'
+alias vi="vim"
+alias o='open'
+alias e="${EDITOR}"
+
+alias be='bundle exec'
+# alias rake='bundle exec rake -t -v'
+# alias cucumber='bundle exec cucumber -b -x'
+# alias rspec='bundle exec rspec'
+
+alias fu='kill -9 %1; ps'
+
+alias reveal='open -R'

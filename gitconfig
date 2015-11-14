@@ -1,0 +1,96 @@
+[alias]
+  l  = log --oneline --decorate --graph
+  sl = !git l -20
+  ll = log --decorate --graph
+  st = status --short --branch
+  di = diff
+  co = checkout
+  ci = commit
+  br = branch
+  dt = difftool
+  dtc = difftool --cached
+  man = help
+  amend = !git ci --amend -C HEAD
+  su = submodule update
+  sui = submodule update --init
+  ls-untracked-files = !git-ls-files -o --exclude-standard
+  ls-ignored-files = !git-ls-files --others -i --exclude-standard
+  ls-modified-files = !git-ls-files -m
+  timeline = !git log --graph --branches --pretty=oneline
+  dead-branches = !git fetch && git remote prune origin && git branch -r --merged origin/master | sed 's# *origin/##' | grep -v 'master$'
+  # commites all changes to a WIP commit, pull rebases and then resets that WIP commit
+  tug = !git add -A && git commit --quiet --allow-empty --message WIP && git pull --rebase && git reset head^
+  shove = !git pull && git push
+  stashshow = "!f() { git stash show -p stash@{$1}; }; f"
+  # as per: http://stackoverflow.com/a/6630277
+  recent = !git log --no-walk --date-order --oneline --decorate $(git rev-list --branches --no-walk | head -10)
+  branch-recent = !git log --no-walk --date-order --oneline --decorate $(git rev-list --branches --no-walk)
+  rom = !git fetch && git rebase origin/master
+  wip = !git add -A && git ci -m WIP && git log -1 || git log -1
+  # stage = !git add -N * && git add -p
+  save = !git wip && git shove
+
+
+  merge-to-latest = !git-merge-to-latest
+  push-to-latest = !get-push-to-latest
+
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+	ui = auto
+  pager = true
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red
+[user]
+	name = Jared Grippe
+	email = jared@devbootcamp.com
+[core]
+  excludesfile = ~/.gitignore
+  # whitespace = trailing-space,space-before-tab
+  autocrlf = false
+  pager = less -FRSX
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[apply]
+  whitespace = fix
+[push]
+  default = current
+[branch]
+  autosetuprebase = always
+[mergetool "diffmerge"]
+  cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
+  trustExitCode = false
+[rebase]
+  autosquash = true
+[rerere]
+  enabled = false
+[github]
+  user = deadlyicon
+  token = 29d13dc5e0ebf14c8a6bbc5ea05156bd
+[help]
+  autocorrect = 20
+
+
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = Kaleidoscope
+[difftool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
+[help]
+	autocorrect = 1
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true

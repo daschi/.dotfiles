@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+if !ARGV.length.between?(1, 2)
+  abort %(Usage:\nslack [channel] "message")
+end
+
+message = ARGV.pop
+channel = ARGV.shift || 'general'
+
+$stdout.reopen("/dev/null", "w")
+$stderr.reopen("/dev/null", "w")
+exec %(curl --data #{message.inspect} https://other.slack.com/services/hooks/slackbot?token=MjRE8xMPCbbS6jddwDKyqkWe\\&channel=%23#{channel})
