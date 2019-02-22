@@ -6,6 +6,8 @@
   di = diff
   co = checkout
   ci = commit
+  rbi = rebase -i origin/master
+  s = status
   br = branch
   dt = difftool
   dtc = difftool --cached
@@ -17,7 +19,7 @@
   ls-ignored-files = !git-ls-files --others -i --exclude-standard
   ls-modified-files = !git-ls-files -m
   timeline = !git log --graph --branches --pretty=oneline
-  dead-branches = !git fetch && git remote prune origin && git branch -r --merged origin/master | sed 's# *origin/##' | grep -v 'master$'
+  dead-branches = !git fetch && git remote prune origin && git branch -r --merged origin/master | sed "s# *origin/##" | grep -v "master$"
   # commites all changes to a WIP commit, pull rebases and then resets that WIP commit
   tug = !git add -A && git commit --quiet --allow-empty --message WIP && git pull --rebase && git reset head^
   shove = !git pull && git push
@@ -29,7 +31,7 @@
   wip = !git add -A && git ci -m WIP && git log -1 || git log -1
   # stage = !git add -N * && git add -p
   save = !git wip && git shove
-
+  remove-local = !git branch --merged master | grep -v "master$" | xargs -n 1 git branch -d
 
   merge-to-latest = !git-merge-to-latest
   push-to-latest = !get-push-to-latest
@@ -49,7 +51,7 @@
 	name = Daniela Schiano di Cola
 	email = daschi87@gmail.com
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = ~/.*
   # whitespace = trailing-space,space-before-tab
   autocrlf = false
   pager = less -FRSX

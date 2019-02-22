@@ -24,7 +24,7 @@ alias gs='git status'
 alias gpull='git pull origin'
 alias gpush='git push origin'
 alias git=hub
-alias gcl = 'git clone'
+alias gcl='git clone'
 
 # docker
 alias dc='docker-compose'

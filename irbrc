@@ -119,6 +119,8 @@ class Binding
   end
 end
 
+require "awesome_print"
+AwesomePrint.irb!
 
 # require 'irb/completion'=D
 # require 'irb/ext/save-history'
@@ -145,7 +147,7 @@ end
 # # taken from @jsmestad's gist - http://gist.github.com/406963
 # require 'pp'
 # # Make gems available
-# require 'rubygems'
+require 'rubygems'
 #
 # # # http://drnicutilities.rubyforge.org/map_by_method/
 # # require 'map_by_method'
