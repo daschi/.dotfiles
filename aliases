@@ -1,33 +1,56 @@
 #!/bin/bash
 
+# cck12 commands
+alias testenv='USE_ECTO_FACTORIES=true RAILS_ENV=test RAKE_ENV=test DATABASE_URL=postgres://localhost:5432/pharaoh_test'
+alias sdr_start='foreman s -f Procfile.dev'
+
+# Alias repos and folders
+alias esh='cd ~/Desktop/ESH/'
+alias mochi='cd ~/Desktop/ESH/mochi/'
+alias sdr='cd ~/Desktop/ESH/pharaoh/'
+alias irt='cd ~/Desktop/ESH/IRT-2016/'
+alias usac-sentinel='cd ~/Desktop/ESH/usac-sentinel/'
+alias fraggler='cd ~/Desktop/ESH/fraggler/'
+alias taric='cd ~/Desktop/ESH/taric'
+alias marmar='cd ~/Desktop/ESH/marmar'
+alias samson='cd ~/Desktop/ESH/samson'
+alias dar='cd ~/Desktop/ESH/dar'
+alias desktop='cd ~/Desktop/'
+alias talend='open /Applications/TOS_DI-20170623_1246-V6.4.1/TOS_DI-macosx-cocoa.app'
+alias dotfiles='atom ~/.dotfiles/'
+
+# Git
+alias gs='git status'
+alias gpull='git pull origin'
+alias gpush='git push origin'
 alias git=hub
+alias gcl = 'git clone'
+
+# docker
+alias dc='docker-compose'
+alias dcx='docker-compose exec web bundle exec'
+
+# bash
 alias copy=pbcopy
 alias paste=pbpaste
-
-alias ls='ls -GF'
+alias ls='ls -aGF'
 alias l='ls -tBh1'
 alias ll='l -l'
 alias lll='ls -Blah'
 alias llh='ll | head'
-
-alias c='clear'
 alias grep='grep --color'
 alias g='grep -i'
-
 alias df='df -h'
 alias du='du -h'
 alias less='less -r'
-
-alias openfiles='lsof'
+alias fu='kill -9 %1; ps'
+alias reveal='open -R'
 alias vi="vim"
 alias o='open'
 alias e="${EDITOR}"
 
+# ruby / rails
 alias be='bundle exec'
-# alias rake='bundle exec rake -t -v'
-# alias cucumber='bundle exec cucumber -b -x'
-# alias rspec='bundle exec rspec'
-
-alias fu='kill -9 %1; ps'
-
-alias reveal='open -R'
+alias bake='bundle exec rake db:create db:migrate'
+alias clobpile='bundle exec rake assets:clobber assets:precompile'
+alias rspec='bundle exec rspec'
