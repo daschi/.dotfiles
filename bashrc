@@ -151,3 +151,13 @@ export LSCOLORS=ExGxFxdxCxDxDxaccxaeex
 # source /usr/local/etc/bash_completion.d/docker
 # eval "$(boot2docker shellinit)"
 # source /usr/local/etc/bash_completion.d/docker-compose
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /Users/daschi/.nodenv/versions/9.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /Users/daschi/.nodenv/versions/9.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /Users/daschi/.nodenv/versions/9.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /Users/daschi/.nodenv/versions/9.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /Users/daschi/.nodenv/versions/9.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /Users/daschi/.nodenv/versions/9.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash

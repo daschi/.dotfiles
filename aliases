@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+# Python
+alias python='python3'
 # cck12 commands
 alias testenv='USE_ECTO_FACTORIES=true RAILS_ENV=test RAKE_ENV=test DATABASE_URL=postgres://localhost:5432/pharaoh_test'
 alias sdr_start='foreman s -f Procfile.dev'
@@ -14,11 +17,14 @@ alias fraggler='cd ~/Desktop/ESH/fraggler/'
 alias taric='cd ~/Desktop/ESH/taric'
 alias marmar='cd ~/Desktop/ESH/marmar'
 alias samson='cd ~/Desktop/ESH/samson'
+alias hobbes='cd ~/Desktop/ESH/hobbes'
+alias baloo='cd ~/Desktop/ESH/baloo'
+alias bodhi='cd ~/Desktop/ESH/bodhi'
 alias dar='cd ~/Desktop/ESH/dar'
 alias desktop='cd ~/Desktop/'
 alias talend='open /Applications/TOS_DI-20170623_1246-V6.4.1/TOS_DI-macosx-cocoa.app'
 alias dotfiles='atom ~/.dotfiles/'
-
+alias reflect='touch ~/.reflections/$( date "+%Y_%m_%d_%H_%M_%S" ).md && cd ~/.reflections'
 # Git
 alias gs='git status'
 alias gpull='git pull origin'

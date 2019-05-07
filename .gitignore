@@ -51,3 +51,4 @@ libpeerconnection.log
 bower_components/
 node_modules/
 .sass-cache
+.notes.md
