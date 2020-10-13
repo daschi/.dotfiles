@@ -130,8 +130,8 @@ fork_db() {
   fi
 }
 
-export EDITOR='atom'
-export GIT_EDITOR='atom -w'
+export EDITOR='code'
+export GIT_EDITOR='code -w'
 
 export PATH="./bin:./script:$DOTFILES/bin:/usr/local/bin:$PATH"
 
